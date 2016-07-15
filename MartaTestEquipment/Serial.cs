@@ -580,8 +580,13 @@ namespace MartaTestEquipment
                 while (i < txMessage.Length)
                 {
                     m_SerialPort.Write(txMessage, i, 1);
-                    Thread.Sleep(50);
                     i++;
+#if DAS
+                    if ((i % 16) == 0)
+                    {
+                        Thread.Sleep(50);
+                    }
+#endif
                 }
             }
             catch (Exception e)
